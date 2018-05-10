@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May 10 18:57:17 2018
+
+@author: abrahao de weber
+"""
+
 import pygame
 import sys
 from pygame.locals import *
@@ -12,34 +19,38 @@ imagem2 = pygame.image.load("batalha.jpg").convert()
 water = pygame.image.load("agua.png").convert()
 img_botao = pygame.image.load("botao.png").convert()
 coord = [551,28]
-quadrado = [44,40]
+quadrado = [43,40]
 unicolugar = False
 atual = [0,0]
 def Game():
-	unicolugar = False  
-	atual = [0,0]
-	while True:
-		janela.blit(imagem, (0, 0))
-		janela.blit(imagem2,(510,0))
-        
-		xx,yy = pygame.mouse.get_pos()
-		if unicolugar:
-			janela.blit(water,(atual[0],atual[1]))
-		if xx > coord[0] and yy > coord[1] and xx < coord[0]+quadrado[0] and yy < coord[1] + quadrado[1]:
-			 janela.blit(img_botao,(coord[0],coord[1]))      
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-					pygame.quit()
-			if event.type == pygame.MOUSEBUTTONUP:
-					pox,poy = pygame.mouse.get_pos()
-					if pox > coord[0] and poy > coord[1] and pox < coord[0]+quadrado[0] and poy < coord[1] + quadrado[1]:
-						unicolugar=True
-						atual=[coord[0],coord[1]]                        
-					else:
-						pass#unicolugar=False                   				    
-        #550 30
+    unicolugar = False  
+    atual = [0,0]
+    i = 1
+    while True:
+        janela.blit(imagem, (0, 0))
+        janela.blit(imagem2,(510,0))
+        xx,yy = pygame.mouse.get_pos()
+        i = 1
+        if unicolugar:
+            janela.blit(water,(atual[0],atual[1]))
+        while i < 11:
+            if xx > coord[0]+(i-1)*quadrado[0] and yy > coord[1] and xx < coord[0]+i*quadrado[0] and yy < coord[1] + quadrado[1]:
+                janela.blit(img_botao,(coord[0]+(i-1)*quadrado[0],coord[1]))   
+            i += 1
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONUP:
+                pox,poy = pygame.mouse.get_pos()
+                if pox > coord[0] and poy > coord[1] and pox < coord[0]+quadrado[0] and poy < coord[1] + quadrado[1]:
+                    unicolugar=True
+                    atual=[coord[0],coord[1]]                        
+                else:
+                    pass#unicolugar=False                   				    
 		
 					
-		pygame.display.update()
+        pygame.display.update()
 Game()
 
+
+            
