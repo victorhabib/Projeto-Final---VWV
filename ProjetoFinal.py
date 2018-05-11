@@ -19,7 +19,7 @@ imagem2 = pygame.image.load("batalha.jpg").convert()
 water = pygame.image.load("agua.png").convert()
 img_botao = pygame.image.load("botao.png").convert()
 coord = [551,28]
-quadrado = [43,40]
+quadrado = [43,39]
 unicolugar = False
 atual = [0,0]
 def Game():
@@ -31,12 +31,17 @@ def Game():
         janela.blit(imagem2,(510,0))
         xx,yy = pygame.mouse.get_pos()
         i = 1
+        x = 1
         if unicolugar:
             janela.blit(water,(atual[0],atual[1]))
-        while i < 11:
-            if xx > coord[0]+(i-1)*quadrado[0] and yy > coord[1] and xx < coord[0]+i*quadrado[0] and yy < coord[1] + quadrado[1]:
-                janela.blit(img_botao,(coord[0]+(i-1)*quadrado[0],coord[1]))   
+        while i < 11 and x < 9:
+            if xx > coord[0]+(i-1)*quadrado[0] and yy > coord[1] + (x-1)*quadrado[1]  and xx < coord[0]+i*quadrado[0] and yy < coord[1] + x*quadrado[1]:
+                janela.blit(img_botao,(coord[0]+(i-1)*quadrado[0],coord[1]+(x-1)*quadrado[1]))
             i += 1
+            if i == 11:
+                i = 1
+                x += 1
+            
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
