@@ -20,7 +20,7 @@ pygame.display.set_caption('Batalha Naval')
 imagem = pygame.image.load("batalha.jpg").convert()
 imagem2 = pygame.image.load("batalha.jpg").convert()
 water = pygame.image.load("agua.png").convert()
-img_botao = pygame.image.load("botao.png").convert()
+img_botao = pygame.image.load("botao.oficial.png").convert()
 preto = pygame.image.load("preto.png").convert()
 coord = [731,28]
 quadrado = [43,39]
