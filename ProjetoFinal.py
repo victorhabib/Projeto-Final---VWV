@@ -30,6 +30,8 @@ xis_image = pygame.image.load("x.png").convert()
 xis_image_verde = pygame.image.load("x_verde.png").convert()
 voce_ganhou = pygame.image.load("voce_ganhou.png").convert_alpha()
 voce_perdeu = pygame.image.load("voce_perdeu.png").convert_alpha()
+tentar_novamente = pygame.image.load("tentar.png").convert_alpha()
+sair = pygame.image.load("sair.png").convert_alpha()
 
 
 coord = [731,28]
@@ -97,6 +99,7 @@ def Game():
     posicionou = False
     perdeu = False
     contador_rot = 0
+    resultado = 0
     mousepressed_up = [False,-1]
     random_i=random.randint(0,9)
     random_x=random.randint(0,6)
@@ -114,6 +117,8 @@ def Game():
         
         janela.blit(travar, (9, 369))
         janela.blit(comecar, (230, 369))
+        janela.blit(voce_ganhou,(300,500))
+
         
         xx,yy = pygame.mouse.get_pos()
         #print(xx,yy)
@@ -129,6 +134,7 @@ def Game():
                     clicoutravar = True
                     clicoucomecar = True
                     clicoubotao = True
+                    clicounovamente = True
                     if xx > coord_navio[i][0] and xx < coord_navio[i][0] + tam_navio[i][1] and yy > coord_navio[i][1] and yy < coord_navio[i][1] + tam_navio[i][0]:
                         mousepressed_up=[True,i]
                         
@@ -232,8 +238,7 @@ def Game():
 
 
 
-
-
+        
         if clicoucomecar:
             if xx > 230 and xx < 427 and yy > 369 and yy < 419:
                 
@@ -245,15 +250,18 @@ def Game():
                     
                 while contador < 2000:
                     if len(travarlista) == len(listanavio):
-                        janela.blit(comecou_image, (510,106))
+                        janela.blit(comecou_image, (390,50))
                         contador += 1
                         pygame.display.update()
                         listacomecar = 1
                         comecou = 1
+                        resultado = 1
                     else:
-                        janela.blit(aviso_travar, (310,106))
+                        janela.blit(aviso_travar, (400,30))
                         contador += 1
                         pygame.display.update()
+        
+
                 
 
                     
@@ -305,8 +313,7 @@ def Game():
                     xis2[random_i][random_x] = 1
                     turno += 1
 
-                print(turno)
-                print(contador_rot,random_i,random_x)
+            
 
 
 
@@ -333,7 +340,7 @@ def Game():
 
 
        #voce ganhou
-        if comecou:
+        if resultado:
             perdeu = False
             for i in range(10):
                 for x in range(7):
@@ -341,15 +348,17 @@ def Game():
                         perdeu = True
 
             if not perdeu:
-                while contador_ganhar < 2000:
-                    janela.blit(voce_ganhou,(300,300))
-                    contador_ganhar += 1
-                    pygame.display.update()
+                janela.blit(voce_ganhou,(330,11))
+                janela.blit(tentar_novamente,(342,260))
+                janela.blit(sair,(572,260))
+                comecou = False
+                pygame.display.update()
+
 
         
 
         #voce perdeu
-        if comecou:
+        if resultado:
             perdeu = True
             for i in range(9):
                 for x in range(7):
@@ -357,10 +366,13 @@ def Game():
                         perdeu = False
 
             if perdeu:
-                while contador_ganhar < 2000:
-                    janela.blit(voce_perdeu,(300,300))
-                    contador_ganhar += 1
-                    pygame.display.update()
+                janela.blit(voce_perdeu,(330,11))
+                janela.blit(tentar_novamente,(342,260))
+                janela.blit(sair,(572,260))
+                comecou = False
+                pygame.display.update()
+        
+
 
 
 
@@ -368,6 +380,7 @@ def Game():
         clicoubotao = False
         clicoucomecar = False
         clicoutravar = False
+        clicounovamente = False
         
 
         
