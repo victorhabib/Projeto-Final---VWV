@@ -46,10 +46,11 @@ navio1 = pygame.image.load("navio1.png").convert_alpha()
 navio2 = pygame.image.load("navio2.png").convert_alpha()
 navio3 = pygame.image.load("navio3.png").convert_alpha()
 navio4 = pygame.image.load("navio4.png").convert_alpha()
-travar = pygame.image.load("travar.png").convert()
-comecar = pygame.image.load("comecar.png").convert()
+travar = pygame.image.load("travar.png").convert_alpha()
+comecar = pygame.image.load("comecar.png").convert_alpha()
 comecou_image = pygame.image.load("comecou.png").convert_alpha()
 aviso_travar = pygame.image.load("travar_aviso.png").convert_alpha()
+aviso_rot = pygame.image.load("aviso_rotate.png").convert_alpha()
 
 navio1 = pygame.transform.rotate(navio1, 270)
 navio2 = pygame.transform.rotate(navio2, 270)
@@ -127,13 +128,13 @@ def Game():
         janela.blit(imagem, (180, 0))
         janela.blit(imagem2,(690,0))
         
-        janela.blit(travar, (9, 369))
-        janela.blit(comecar, (230, 369))
-        janela.blit(voce_ganhou,(300,500))
+        janela.blit(travar, (9, 300))
+        janela.blit(comecar, (240, 300))
+        janela.blit(aviso_rot,(600,270))
 
         
         xx,yy = pygame.mouse.get_pos()
-        #print(xx,yy)
+        print(xx,yy)
         #Condicao para clicar e arrastar o navio
         if mousepressed_up[0] and listanavio[mousepressed_up[1]] not in travarlista:
             coord_navio[mousepressed_up[1]]=[xx,yy,coord_navio[mousepressed_up[1]][2]]
@@ -211,7 +212,7 @@ def Game():
             for x in range(7):
                 if clicoutravar:
                     
-                    if xx > 9 and xx < 206 and yy > 369 and yy < 419:
+                    if xx > 55 and xx < 260 and yy > 360 and yy < 450:
                         if coord_navio[mousepressed_up[1]][0] > coord1[0]+(i)*quadrado[0] and coord_navio[mousepressed_up[1]][1] > coord1[1] + (x)*quadrado[1]  and coord_navio[mousepressed_up[1]][0] <= coord1[0]+(i+1)*quadrado[0] and coord_navio[mousepressed_up[1]][1] <= coord1[1] + (x+1)*quadrado[1] and listanavio[mousepressed_up[1]] not in travarlista:
                             #print("teste")
                             coord_navio[mousepressed_up[1]][0] = coord1[0] + (i)*quadrado[0]
@@ -252,7 +253,7 @@ def Game():
 
         
         if clicoucomecar:
-            if xx > 230 and xx < 427 and yy > 369 and yy < 419:
+            if xx > 286 and xx < 489 and yy > 360 and yy < 450:
                 
                 if contador >= 2000:
                     if len(travarlista) != len(listanavio):
