@@ -66,16 +66,18 @@ voce=[]
 xis = []
 xis2 = []
 
-h = 0
+
     
-contador_ganhar = 0    
-contador = 0
-turno = 0
-listacomecar = 0
-comecou = 0
-xis_lista = []
-oponente_lista = []
+   
+
+
+
+
 def Game():
+    xis2 = []
+    xis = []
+    voce = []
+    oponente = []
     for i in range(10):
         voce.append([])
         oponente.append([])
@@ -88,14 +90,14 @@ def Game():
             xis2[-1].append(0)
     global listanavio
     global navio4
-    global contador
-    global turno
-    global listacomecar
-    global contador_ganhar
-    global comecou
-    global xis_lista
-    global oponente_lista
-    global h
+    contador = 0
+    turno = 0
+    listacomecar = 0
+    contador_ganhar = 0
+    comecou = 0
+    xis_lista = []
+    oponente_lista = []
+    h = 0
     posicionou = False
     perdeu = False
     contador_rot = 0
@@ -105,6 +107,16 @@ def Game():
     random_x=random.randint(0,6)
     i = 1
     travarlista = []
+    coord = [731,28]
+    quadrado = [44,44]
+
+    coord1 = [221,28]
+
+    tam_navio = [[44,40,1],[88,40,2],[132,40,3],[176,40,4]]
+    coord_navio = [[18,8,0],[18,70,0],[18,176,0],[118,8,0]]
+    rotate_navio = []
+    listanavionr = [navio1,navio2,navio3,navio4]
+    listanavio = [navio1,navio2,navio3,navio4]
     while True:
 
         clicoutravar = False
@@ -352,8 +364,14 @@ def Game():
                 janela.blit(tentar_novamente,(342,260))
                 janela.blit(sair,(572,260))
                 comecou = False
+                if clicounovamente:
+                    if xx > 390 and xx < 594 and yy > 319 and yy < 408:
+                        Game()
+                    if xx > 619 and xx < 822 and yy > 320 and yy < 409:
+                        pygame.quit()
+                        exit()
                 pygame.display.update()
-
+       
 
         
 
@@ -370,6 +388,12 @@ def Game():
                 janela.blit(tentar_novamente,(342,260))
                 janela.blit(sair,(572,260))
                 comecou = False
+                if clicounovamente:
+                    if xx > 390 and xx < 594 and yy > 319 and yy < 408:
+                        Game()
+                    if xx > 619 and xx < 822 and yy > 320 and yy < 409:
+                        pygame.quit()
+                        exit()
                 pygame.display.update()
         
 
@@ -387,6 +411,7 @@ def Game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                exit()
             
                                                 
                     
